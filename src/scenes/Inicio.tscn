@@ -1,0 +1,165 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://grafica/ShopView/Piso.png" type="Texture" id=1]
+[ext_resource path="res://grafica/ShopView/Pilares.png" type="Texture" id=2]
+[ext_resource path="res://script/Inicio.gd" type="Script" id=3]
+[ext_resource path="res://prefebs/objetos_bg/satelite_obitando.tscn" type="PackedScene" id=4]
+[ext_resource path="res://musicas/on_play (online-audio-converter.com).wav" type="AudioStream" id=5]
+[ext_resource path="res://prefebs/Settigns.tscn" type="PackedScene" id=6]
+[ext_resource path="res://grafica/skay3.png" type="Texture" id=7]
+[ext_resource path="res://grafica/background/nebulosa.png" type="Texture" id=8]
+[ext_resource path="res://grafica/skay.jpg" type="Texture" id=9]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://font/dirtyoldtown.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="back_1" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="back_1"]
+
+[node name="primeiro" type="ParallaxLayer" parent="back_1/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 2048 )
+
+[node name="Sprite" type="Sprite" parent="back_1/ParallaxBackground/primeiro"]
+scale = Vector2( 1.2, 1 )
+texture = ExtResource( 9 )
+offset = Vector2( 300, 2048 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="terceiro" type="ParallaxLayer" parent="back_1/ParallaxBackground"]
+motion_scale = Vector2( 1, 0.15 )
+motion_mirroring = Vector2( 0, 1250 )
+
+[node name="Node2D" parent="back_1/ParallaxBackground/terceiro" instance=ExtResource( 4 )]
+
+[node name="segundo" type="ParallaxLayer" parent="back_1/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 4096 )
+
+[node name="Sprite" type="Sprite" parent="back_1/ParallaxBackground/segundo"]
+scale = Vector2( 1.2, 1 )
+texture = ExtResource( 7 )
+offset = Vector2( 300, 2048 )
+
+[node name="quarto" type="ParallaxLayer" parent="back_1/ParallaxBackground"]
+motion_mirroring = Vector2( 0, 3000 )
+
+[node name="Sprite" type="Sprite" parent="back_1/ParallaxBackground/quarto"]
+modulate = Color( 1, 1, 1, 0.278431 )
+position = Vector2( -683.922, -3884.57 )
+scale = Vector2( 3.47599, 2.89666 )
+texture = ExtResource( 8 )
+offset = Vector2( 300.494, 2048.11 )
+
+[node name="back_2" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -139, 642 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="back_3" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Settigns" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="Container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="Container"]
+margin_right = 147.0
+margin_bottom = 40.0
+rect_clip_content = true
+custom_colors/font_color_focus = Color( 1, 0.996078, 0.968627, 1 )
+custom_colors/font_color = Color( 0.894118, 0.894118, 0.894118, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.572549, 0.572549, 0.572549, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/normal = SubResource( 8 )
+text = "START"
+flat = true
+
+[node name="Shop" type="Button" parent="Container"]
+margin_right = 109.0
+margin_bottom = 40.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.917647, 0.917647, 0.917647, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 0.968627, 1 )
+custom_colors/font_color_pressed = Color( 0.635294, 0.635294, 0.635294, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+text = "SHOP"
+flat = true
+
+[node name="Fases" type="Button" parent="Container"]
+margin_right = 83.0
+margin_bottom = 40.0
+custom_colors/font_color_focus = Color( 1, 0.996078, 0.968627, 1 )
+custom_colors/font_color = Color( 0.894118, 0.894118, 0.894118, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.572549, 0.572549, 0.572549, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 3 )
+text = "MAP"
+flat = true
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[connection signal="pressed" from="Container/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Container/Shop" to="." method="_on_Shop_pressed"]
+[connection signal="pressed" from="Container/Fases" to="." method="_on_Fases_pressed"]

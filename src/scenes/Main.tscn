@@ -1,0 +1,201 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://script/main.gd" type="Script" id=1]
+[ext_resource path="res://prefebs/ParallaxBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefebs/Nave.tscn" type="PackedScene" id=3]
+[ext_resource path="res://grafica/coin.png" type="Texture" id=4]
+[ext_resource path="res://prefebs/powerUp/impulso.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefebs/powerUp/bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://script/Eventos_powerup.gd" type="Script" id=7]
+[ext_resource path="res://grafica/up.png" type="Texture" id=8]
+[ext_resource path="res://grafica/Down.png" type="Texture" id=9]
+[ext_resource path="res://script/utils/DebugDraw.gd" type="Script" id=10]
+[ext_resource path="res://font/dirtyoldtown.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://grafica/menu.png" type="Texture" id=15]
+[ext_resource path="res://musicas/rip_hop_raiva_Arms_Dealer (online-audio-converter.com).wav" type="AudioStream" id=16]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://font/dirtyoldtown.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 18
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 18
+font_data = ExtResource( 13 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 120, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 200, 0, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://font/Corbel Bold.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+size = 28
+font_data = SubResource( 12 )
+
+[node name="Control" type="Control"]
+anchor_left = 0.005
+anchor_top = 0.00878906
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -9.0
+rect_pivot_offset = Vector2( 300, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 108.0 ],
+"_edit_use_anchors_": true,
+"_edit_vertical_guides_": [ 195.0, 39.0, 568.0 ]
+}
+
+[node name="HUD" type="Control" parent="."]
+anchor_left = -0.001
+anchor_top = -0.002
+anchor_right = 0.985
+anchor_bottom = 1.001
+margin_left = 0.719406
+margin_top = 0.555504
+margin_right = 8.39136
+margin_bottom = 4.97241
+
+[node name="Tempo" type="Label" parent="HUD"]
+anchor_left = -0.012
+anchor_top = 0.083
+anchor_right = 1.012
+anchor_bottom = 0.106
+margin_left = 0.14
+margin_top = 0.509995
+margin_right = -0.140076
+margin_bottom = -86.18
+custom_fonts/font = SubResource( 2 )
+align = 1
+
+[node name="score" type="Label" parent="HUD"]
+anchor_left = 0.017
+anchor_top = 0.5
+anchor_right = 0.945
+anchor_bottom = 0.518
+margin_left = 17.811
+margin_top = 1.75
+margin_right = 17.6511
+margin_bottom = 15.21
+custom_fonts/font = SubResource( 3 )
+align = 1
+
+[node name="Reiniciar" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 256.4, 903.75 )
+scale = Vector2( 0.799999, 0.799999 )
+z_index = 4
+normal = ExtResource( 8 )
+pressed = ExtResource( 9 )
+
+[node name="VoltarMenu" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 256.4, 268.75 )
+z_index = 4
+normal = ExtResource( 15 )
+
+[node name="km" type="Label" parent="HUD"]
+anchor_left = 0.053
+anchor_top = 0.015
+anchor_right = 0.181
+anchor_bottom = 0.039
+margin_left = 35.2386
+margin_top = 33.5277
+margin_right = 95.5318
+margin_bottom = 33.7719
+text = "0 KM
+"
+autowrap = true
+
+[node name="Coins_tex" type="Label" parent="HUD"]
+anchor_left = 0.846
+anchor_top = 0.011
+anchor_right = 0.974
+anchor_bottom = 0.036
+margin_left = -53.9841
+margin_top = 41.6536
+margin_right = -16.6909
+margin_bottom = 43.8664
+text = "0"
+
+[node name="_coin_" type="AnimatedSprite" parent="HUD/Coins_tex"]
+position = Vector2( -21, 6 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 11 )
+frame = 1
+playing = true
+
+[node name="AudioMain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+autoplay = true
+
+[node name="Nave" parent="." instance=ExtResource( 3 )]
+z_index = 2
+
+[node name="Eventos_iniciais" type="Node2D" parent="."]
+
+[node name="Eventos_powerup" type="Node2D" parent="."]
+script = ExtResource( 7 )
+powerups_event = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 5 ) ]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+scroll_ignore_camera_zoom = true
+
+[node name="debug" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 13 )
+autowrap = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="TimerPowerControl" type="Timer" parent="."]
+
+[connection signal="Nave_powerup" from="." to="." method="_on_Control_Nave_powerup"]
+[connection signal="coin_anime" from="." to="." method="_on_Control_coin_anime"]
+[connection signal="gui_input" from="HUD" to="." method="_on_HUD_gui_input"]
+[connection signal="pressed" from="HUD/Reiniciar" to="." method="_on_Reiniciar_pressed"]
+[connection signal="pressed" from="HUD/VoltarMenu" to="." method="_on_VoltarMenu_pressed"]
+[connection signal="timeout" from="TimerPowerControl" to="." method="_on_TimerPowerControl_timeout"]

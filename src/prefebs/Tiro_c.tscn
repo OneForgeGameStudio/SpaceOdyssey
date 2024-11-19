@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://grafica/tiroM1.png" type="Texture" id=1]
+[ext_resource path="res://grafica/tiroM2.png" type="Texture" id=2]
+[ext_resource path="res://grafica/tiroM5.png" type="Texture" id=3]
+[ext_resource path="res://script/Tiro_c.gd" type="Script" id=4]
+[ext_resource path="res://grafica/tiroM4.png" type="Texture" id=5]
+[ext_resource path="res://grafica/voa.png" type="Texture" id=6]
+[ext_resource path="res://grafica/tiroM3.png" type="Texture" id=7]
+[ext_resource path="res://songs/Arcade Action 05.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "explodi",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "normal",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 2.0
+
+[node name="tiro" type="Area2D" groups=["Projectiles"]]
+scale = Vector2( 2, 2 )
+script = ExtResource( 4 )
+
+[node name="AnimaTiro" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.1875, 0.1875 )
+frames = SubResource( 1 )
+animation = "explodi"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "enemy"
+
+[connection signal="area_entered" from="." to="." method="_on_Tiro_c_area_entered"]
+[connection signal="bateu" from="." to="." method="_on_Tiro_c_bateu"]

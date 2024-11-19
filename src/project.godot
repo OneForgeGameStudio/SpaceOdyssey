@@ -1,0 +1,114 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Bases",
+"language": "GDScript",
+"path": "res://script/utils/bases.gd"
+}, {
+"base": "Node",
+"class": "Event",
+"language": "GDScript",
+"path": "res://script/Event.gd"
+}, {
+"base": "Reference",
+"class": "MyCrypto",
+"language": "GDScript",
+"path": "res://script/utils/cryptografia.gd"
+}, {
+"base": "Node2D",
+"class": "PlanetManneger",
+"language": "GDScript",
+"path": "res://prefebs/Planets/planetManneger.gd"
+}, {
+"base": "Reference",
+"class": "SaveGame",
+"language": "GDScript",
+"path": "res://script/utils/saveGame.gd"
+}, {
+"base": "Bases",
+"class": "Tiro",
+"language": "GDScript",
+"path": "res://script/projectiles/projectiles_base.gd"
+} ]
+_global_script_class_icons={
+"Bases": "",
+"Event": "",
+"MyCrypto": "",
+"PlanetManneger": "",
+"SaveGame": "",
+"Tiro": ""
+}
+
+[application]
+
+config/name="Nave_Combat"
+run/main_scene="res://scenes/Load.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://script/Global.gd"
+
+[debug]
+
+settings/fps/force_fps=60
+
+[display]
+
+window/size/width=720
+window/size/height=1334
+window/handheld/orientation="sensor"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+
+[global]
+
+wind=false
+win=false
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
+batching/custom_user_dir_name=""
+batching/use_custom_user_dir=false
