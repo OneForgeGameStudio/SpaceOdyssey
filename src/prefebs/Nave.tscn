@@ -338,7 +338,6 @@ offset = Vector2( 0, 34 )
 modulate = Color( 1, 1, 0.592157, 1 )
 position = Vector2( 0, 32 )
 frames = SubResource( 16 )
-frame = 6
 playing = true
 
 [node name="Motor_direito" parent="AnimatedSprite" instance=ExtResource( 10 )]
@@ -361,9 +360,7 @@ collision_layer = 129
 collision_mask = 129
 
 [node name="C_nave" type="CollisionShape2D" parent="Nave"]
-visible = false
 shape = SubResource( 15 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )

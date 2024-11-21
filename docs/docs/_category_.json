@@ -1,0 +1,10 @@
+{
+    "label": "Introdução",
+    "position": 1,
+    "link": {
+        "label": "Introdução",
+        "url": "http://localhost:3000/SpaceOdyssey/intro",
+        "description": "Na primeira sprint, nosso principal foco está em contextualizar o projeto com uma arquitetura inicial e, principalmente, com foco no nosso entendimento das necessidades de negócios do usuário."
+    }
+  }
+  

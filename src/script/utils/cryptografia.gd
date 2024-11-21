@@ -150,7 +150,7 @@ var latamAlphabet = {
 # 	var result = ""
 # 	var chunck_count = 0
 # 	var _data = str(data)
-		
+
 
 # 	for i in range(_data.length()):
 # 		var c = _data[i] # Get the character
@@ -165,12 +165,12 @@ var latamAlphabet = {
 # 				if is_upper:
 # 					c = c.to_upper()
 # 				key = (key + 1) % alphabet.length()
-			
+
 # 		elif c == 32:
 # 			chunck_count += 2
 # 			key = (key + chunck_count) % alphabet.length()
 # 			#print("new key :",key, "chunck_count: ", chunck_count)
-		
+
 # 		result += c
 # 	print(result)
 
@@ -184,7 +184,7 @@ var latamAlphabet = {
 # 		var c = _data[i] # Get the character
 # 		if c != " ":
 # 			var is_upper = true if c == c.to_upper() else false
-			
+
 # 			c = c.to_lower()
 # 			var index = alphabet.find(c)
 # 			if index != -1:

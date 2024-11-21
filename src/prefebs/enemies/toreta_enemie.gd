@@ -28,19 +28,24 @@ export var live = 1
 export var min_distance_to_charge = 600
 export var charge_speed = 1000
 var _smoothed_charge_direction = Vector2(1,1)
-var guarding_mount := 10 # Quantidade de tiros que esse estado tem
+
+var guarding_mount := 60 # Quantidade de tiros que esse estado tem
+var max_gun_rotation = 23
+
 var charge_timer :float = 0.0
 
 var _target_position = 0 #Global.nave.pos 
-var crash_direction: Vector2
+var formacao = ""
+
 
 
 func _ready():
 	state = States.SPAW
 	blink = true
 
-	$Asa_esquerda/Arma/EfeitoTiro.visible = false
-	$Asa_direita/Arma/EfeitoTiro2.visible = false
+	$PathFollow2D/Area2D/Asa_esquerda/Arma/EfeitoTiro.visible = false
+	$PathFollow2D/Area2D/Asa_direita/Arma/EfeitoTiro2.visible = false
+
 
 
 func _process(delta):
@@ -63,13 +68,13 @@ var floop_motor = false
 func _motor_animated():
 	var max_position = 1.2
 	if floop_motor == true:
-		$cabine/Motor/fuego.modulate = Color(1,1,1,0.2)
+		$PathFollow2D/Area2D/cabine/Motor/fuego.modulate = Color(1,1,1,0.2)
 		floop_motor = false
 	else:
 		floop_motor = true
-		$cabine/Motor/fuego.modulate = Color(1,1,1,1)
+		$PathFollow2D/Area2D/cabine/Motor/fuego.modulate = Color(1,1,1,1)
 		
-	$cabine/Motor.position.y = max_position * getDegress(_time, max_position, _duration) - 12
+	$PathFollow2D/Area2D/cabine/Motor.position.y = max_position * getDegress(_time, max_position, _duration) - 12
 	
 
 func _asa_animated() -> void:
@@ -99,14 +104,29 @@ func take_damage(amount):
 # State machine
 func _on_Nave_tiro():
 	if(Global.Jogo_on == true):
-		$Asa_esquerda/Arma/EfeitoTiro.visible = true
-		$Asa_direita/Arma/EfeitoTiro2.visible = true
+		var direction1:Vector2 = Vector2.ZERO
+		var direction2:Vector2 = Vector2.ZERO
+		$PathFollow2D/Area2D/Asa_esquerda/Arma/EfeitoTiro.visible = true
+		$PathFollow2D/Area2D/Asa_direita/Arma/EfeitoTiro2.visible = true
 		var tiro1 = Laser.instance()
 		var tiro2 = Laser.instance()
-		tiro1.position = $Asa_esquerda/Arma/Position2D.global_position
-		tiro2.position = $Asa_direita/Arma/Position2D2.global_position
-		var direction1:Vector2 = _target_position - $Asa_esquerda/Arma/Position2D.global_position
-		var direction2:Vector2 = _target_position - $Asa_direita/Arma/Position2D2.global_position
+		tiro1.position = $PathFollow2D/Area2D/Asa_esquerda/Arma/Position2D.global_position
+		tiro2.position = $PathFollow2D/Area2D/Asa_direita/Arma/Position2D2.global_position
+		
+		var max_dif = max_gun_rotation
+		var modulo_dif = 1
+		
+		
+		if ( abs(_target_position.x - $PathFollow2D/Area2D/Asa_esquerda/Arma/Position2D.global_position.x) < max_dif):
+			direction1 = _target_position - $PathFollow2D/Area2D/Asa_esquerda/Arma/Position2D.global_position
+			direction2 = _target_position - $PathFollow2D/Area2D/Asa_direita/Arma/Position2D2.global_position
+		else:
+			if _target_position.x - $PathFollow2D/Area2D/Asa_esquerda/Arma/Position2D.global_position.x < 0:
+				modulo_dif = -1
+			direction1 = Vector2(max_dif * modulo_dif ,$PathFollow2D/Area2D/Asa_esquerda/Arma/Position2D.global_position.y) 
+			direction2 = Vector2(max_dif * modulo_dif ,$PathFollow2D/Area2D/Asa_direita/Arma/Position2D2.global_position.y)
+		
+
 		tiro2.rotation_degrees = rad2deg(atan2(-direction2.x,-direction2.y))
 		tiro1.rotation_degrees = rad2deg(atan2(-direction1.x,-direction1.y)) 
 		tiro1.direction = direction1.normalized()
@@ -120,24 +140,27 @@ func _on_Nave_tiro():
 func _spaw_(delta):
 	normal_animate(delta)
 	if position.y < 60:
+		$PathFollow2D/Area2D/cabine/Motor.rotation_degrees -= delta * 20
 		position.y += delta * speed
-		return States.SPAW
-	if position.x < 500:
 		position.x += delta * speed*1.2
 		return States.SPAW
 	return States.GUARDING
 
 func _guarding_(delta):
 	normal_animate(delta)
-	$cabine.rotation_degrees = 0
+	$PathFollow2D/Area2D/cabine/Motor.rotation_degrees = 0
+	#$PathFollow2D.offset += delta * speed * 3
 	if guarding_mount >= 0:
 		tiro_t += delta
 		if tiro_t > 0.3:
 			_on_Nave_tiro()
 			tiro_t = 0
 		elif tiro_t > 0.1:
-			$Asa_esquerda/Arma/EfeitoTiro.visible = false
-			$Asa_direita/Arma/EfeitoTiro2.visible = false
+			$PathFollow2D/Area2D/Asa_esquerda/Arma/EfeitoTiro.visible = false
+			$PathFollow2D/Area2D/Asa_direita/Arma/EfeitoTiro2.visible = false
+	else:
+		$PathFollow2D/Area2D/Asa_esquerda/Arma/EfeitoTiro.visible = false
+		$PathFollow2D/Area2D/Asa_direita/Arma/EfeitoTiro2.visible = false
 		return States.GUARDING
 	
 	return States.SPAW
@@ -149,6 +172,6 @@ func normal_animate(delta):
 	#rotate(get_angle_to(_smoothed_charge_direction))
 	
 	#$cabine.rotation_degrees = rad2deg(get_angle_to(_smoothed_charge_direction)) - 90
-	if abs(rad2deg(get_angle_to(_smoothed_charge_direction)) - 90) < 23:
-		$Asa_esquerda/Arma.rotation_degrees = rad2deg(get_angle_to(_smoothed_charge_direction)) - 90
-		$Asa_direita/Arma.rotation_degrees = rad2deg(get_angle_to(_smoothed_charge_direction)) - 90
+	if abs(rad2deg(get_angle_to(_smoothed_charge_direction)) - 90) < max_gun_rotation:
+		$PathFollow2D/Area2D/Asa_esquerda/Arma.rotation_degrees = rad2deg(get_angle_to(_smoothed_charge_direction)) - 90
+		$PathFollow2D/Area2D/Asa_direita/Arma.rotation_degrees = rad2deg(get_angle_to(_smoothed_charge_direction)) - 90
