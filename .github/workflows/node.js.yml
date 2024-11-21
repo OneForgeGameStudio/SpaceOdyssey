@@ -1,0 +1,45 @@
+name: Deploy Docusaurus to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      working-directory: ./docs
+      run: npm ci
+
+    - name: Build Docusaurus site
+      working-directory: ./docs
+      run: npm run build
+      
+    - name: Set up Git identity
+      run: |
+        git config --global user.name "jacksonwsaguiar"
+        git config --global user.email "jackson.aguiar@sou.inteli.edu.br"
+        
+    - name: Deploy to GitHub Pages
+      working-directory: ./docs
+      # run: |
+      #   npm install -g gh-pages
+      #   # Configura o repositório remoto para usar o token de autenticação
+      #   git remote set-url origin https://x-access-token:${{ GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      #   gh-pages -d build
+      # env:
+      #   GITHUB_TOKEN: ${{ github.token }}
