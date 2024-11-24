@@ -69,4 +69,4 @@ Em busca de sobrevivência, ele mergulhou no perigoso mundo das corridas espacia
 Agora, entre saltos hiperluminais e linhas de chegada disputadas por segundos, ele corre por mais do que apenas fama. Ele corre para sobreviver... e talvez, descobrir o segredo que sua nave carrega.
 
 ### Gameplay  
-(em construção)  
+(em construção) |
