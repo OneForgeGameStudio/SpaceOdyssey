@@ -330,7 +330,7 @@ current = true
 position = Vector2( 0, -34 )
 frames = SubResource( 14 )
 animation = "parada"
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( 0, 34 )
 
@@ -338,6 +338,7 @@ offset = Vector2( 0, 34 )
 modulate = Color( 1, 1, 0.592157, 1 )
 position = Vector2( 0, 32 )
 frames = SubResource( 16 )
+frame = 6
 playing = true
 
 [node name="Motor_direito" parent="AnimatedSprite" instance=ExtResource( 10 )]

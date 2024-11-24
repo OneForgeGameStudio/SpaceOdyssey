@@ -1,5 +1,5 @@
 ---
-title: Análise de Impacto Ético
+title: Design
 sidebar_position: 4
 ---
 

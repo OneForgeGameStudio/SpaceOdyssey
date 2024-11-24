@@ -1,5 +1,5 @@
 ---
-title: Arquitetura da Solução
+title: Programação
 sidebar_position: 1
 ---
 

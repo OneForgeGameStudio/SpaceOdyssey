@@ -17,11 +17,6 @@ var shake = false
 var id = 0
 var delta = 0.01
 
-var safeArea = {
-	"min":0.3,
-	"max":0.7
-}
-
 var idealView = Vector2(720,1334)
 var percent = Vector2(1,1)
 
@@ -32,35 +27,40 @@ var allNavs = {
 		"coeficiente": 2.20,
 		"poder":9,
 		"vida":1,
-		"color_machine":0
+		"color_machine":0,
+		"equilibrio":1
 	},
 	"Obsidian":{
 		"custo":140,
 		"coeficiente": 5.80,
 		"poder":9,
 		"vida":1,
-		"color_machine": 0.11
+		"color_machine": 0.11,
+		"equilibrio": 0.6
 	},
 	"Placeholder":{
 		"custo":200,
 		"coeficiente": 6.20,
 		"poder":90,
 		"vida":10,
-		"color_machine":0.8
+		"color_machine":0.8,
+		"equilibrio": 0.5
 	},
 	"Spectra":{
 		"custo":85,
 		"coeficiente": 3.20,
 		"poder":11,
 		"vida":1,
-		"color_machine": -0.28
+		"color_machine": -0.28,
+		"equilibrio": 0.8
 	},
 	"Teste":{
 		"custo":185,
 		"coeficiente": 1.20,
 		"poder":9,
 		"vida":1,
-		"color_machine": -0.38
+		"color_machine": -0.38,
+		"equilibrio": 1
 	}
 }
 

@@ -26,8 +26,8 @@ var vel_limite := 1.2
 export var velocidade = 600
 export var coeficiente:float = 1
 export var frame := 0
-onready var limites_d := get_viewport().size.x/15
-onready var limites_e := get_viewport().size.x - (get_viewport().size.x/15)
+var limites_d := 0
+var limites_e := 0
 onready var limite_baixo :=  (get_viewport().size[1]/100)*70
 var direcao := 0
 export var direcaoD := 0
@@ -39,6 +39,9 @@ var aceleration = Vector2(1,1)
 export var tempo := 0.0
 
 func _ready():
+	limites_d = get_viewport().size.x/15
+	limites_e = get_viewport().size.x - (get_viewport().size.x/15)
+	
 	horizontal_force = Vector2(0,0)
 	$AnimatedSprite/NormalEffects.visible = false
 	coeficiente = Global.allNavs[Global.nav_select[Global.id]]["coeficiente"]
@@ -55,7 +58,6 @@ func _ready():
 
 
 func _process(delta):
-	
 	if Input.is_action_pressed("ui_down"):
 		atirando = true
 	
@@ -204,13 +206,15 @@ func start_spanw_animated(pos):
 	$AnimationPlayer.get_animation("start").track_set_key_value(0, 1, pos)
 	$AnimationPlayer.play("start")
 
+onready var safeAreaD := get_viewport().size.x * 0.3
+onready var safeAreaE := get_viewport().size.x * 0.7
 
 func set_target(event):
 	if (event is InputEventScreenDrag or event is InputEventScreenTouch):
 		target = event.position
-		if target.x > get_viewport().size.x * Global.safeArea["max"]:
+		if target.x > safeAreaE:
 			target.x = get_viewport().size.x + 90
-		elif target.x < get_viewport().size.x * Global.safeArea["min"]:
+		elif target.x < safeAreaD:
 			target.x =  -90
 		#print("Diferença: ", position.x - target.x)
 

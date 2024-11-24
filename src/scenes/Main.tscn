@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://script/main.gd" type="Script" id=1]
 [ext_resource path="res://prefebs/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://grafica/up.png" type="Texture" id=8]
 [ext_resource path="res://grafica/Down.png" type="Texture" id=9]
 [ext_resource path="res://script/utils/DebugDraw.gd" type="Script" id=10]
+[ext_resource path="res://grafica/ui/safeZoneView.png" type="Texture" id=11]
 [ext_resource path="res://font/dirtyoldtown.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://grafica/menu.png" type="Texture" id=15]
 [ext_resource path="res://musicas/rip_hop_raiva_Arms_Dealer (online-audio-converter.com).wav" type="AudioStream" id=16]
@@ -90,77 +91,74 @@ anchor_left = -0.001
 anchor_top = -0.002
 anchor_right = 0.985
 anchor_bottom = 1.001
-margin_left = 0.719406
-margin_top = 0.555504
-margin_right = 8.39136
-margin_bottom = 4.97241
+margin_left = 70.0
+margin_top = 70.0
+margin_right = -70.0
+margin_bottom = -70.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.133333 )
 
 [node name="Tempo" type="Label" parent="HUD"]
-anchor_left = -0.012
-anchor_top = 0.083
-anchor_right = 1.012
-anchor_bottom = 0.106
-margin_left = 0.14
-margin_top = 0.509995
-margin_right = -0.140076
-margin_bottom = -86.18
+anchor_right = 1.0
 custom_fonts/font = SubResource( 2 )
+text = "09"
 align = 1
+valign = 1
 
 [node name="score" type="Label" parent="HUD"]
-anchor_left = 0.017
-anchor_top = 0.5
-anchor_right = 0.945
-anchor_bottom = 0.518
-margin_left = 17.811
-margin_top = 1.75
-margin_right = 17.6511
-margin_bottom = 15.21
+anchor_top = 0.545
+anchor_right = 1.0
+anchor_bottom = 0.545
 custom_fonts/font = SubResource( 3 )
+text = "0000000000"
 align = 1
+valign = 1
+
+[node name="km" type="Label" parent="HUD"]
+text = "0 KM
+"
+
+[node name="Coins_tex" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -9.00043
+margin_right = -1.00043
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 9, 0 )
+text = "0000"
+
+[node name="_coin_" type="AnimatedSprite" parent="HUD/Coins_tex"]
+position = Vector2( -21, 6 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 11 )
+frame = 3
+playing = true
 
 [node name="Reiniciar" type="TouchScreenButton" parent="HUD"]
-position = Vector2( 256.4, 903.75 )
+visible = false
 scale = Vector2( 0.799999, 0.799999 )
 z_index = 4
 normal = ExtResource( 8 )
 pressed = ExtResource( 9 )
 
 [node name="VoltarMenu" type="TouchScreenButton" parent="HUD"]
-position = Vector2( 256.4, 268.75 )
+visible = false
 z_index = 4
 normal = ExtResource( 15 )
 
-[node name="km" type="Label" parent="HUD"]
-anchor_left = 0.053
-anchor_top = 0.015
-anchor_right = 0.181
-anchor_bottom = 0.039
-margin_left = 35.2386
-margin_top = 33.5277
-margin_right = 95.5318
-margin_bottom = 33.7719
-text = "0 KM
-"
-autowrap = true
-
-[node name="Coins_tex" type="Label" parent="HUD"]
-anchor_left = 0.846
-anchor_top = 0.011
-anchor_right = 0.974
-anchor_bottom = 0.036
-margin_left = -53.9841
-margin_top = 41.6536
-margin_right = -16.6909
-margin_bottom = 43.8664
-text = "0"
-
-[node name="_coin_" type="AnimatedSprite" parent="HUD/Coins_tex"]
-position = Vector2( -21, 6 )
-scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 11 )
-frame = 4
-playing = true
+[node name="naveSafeArea" type="TextureRect" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -144.0
+margin_top = 1014.0
+margin_right = 144.0
+margin_bottom = 1018.0
+rect_pivot_offset = Vector2( 144, 0 )
+texture = ExtResource( 11 )
 
 [node name="AudioMain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )

@@ -60,22 +60,22 @@ func _ready():
 	var start = eventos[0][3].new()
 	event_config(start)
 	add_child(start)
-	
+	$HUD/naveSafeArea.visible = false
 	$AudioMain.volume_db = -60
+	
+	$HUD/naveSafeArea.modulate.a = 0
+	print(Global.allNavs[Global.nav_select[Global.id]]["equilibrio"])
+	$HUD/naveSafeArea.rect_scale.x = Global.allNavs[Global.nav_select[Global.id]]["equilibrio"]
+	
 	Global.Jogo_on = true
-	$HUD/VoltarMenu.position.x = ((get_viewport().size.x/2) - ($HUD/VoltarMenu.normal.get_width()/2)) * Global.percent.x
-	$HUD/Reiniciar.position.x = ((get_viewport().size.x/2) - ($HUD/VoltarMenu.normal.get_width()/2)) * Global.percent.x
-	$HUD/VoltarMenu.position.y = ((get_viewport().size.y/100)*20) * Global.percent.y
-	$HUD/Reiniciar.position.y = ((get_viewport().size.y/100)*80) * Global.percent.y
-	$HUD/score.visible = false
-	$Nave.visible = true
-	$HUD/Reiniciar.visible = false
-	$HUD/VoltarMenu.visible = false
+	ui_configuration()
 	$Nave.start_spanw_animated(Vector2((get_viewport().size.x)/2,(get_viewport().size.x/100)*120))
-	$HUD.rect_size = get_viewport().size
-
 
 func _process(delta):
+	
+	if $Nave.start == false and $HUD/naveSafeArea.modulate.a != 1:
+		$HUD/naveSafeArea.visible = true
+		$HUD/naveSafeArea.modulate.a += 0.1
 	
 	if $Eventos_iniciais.get_children().size() > 0:
 		$debug.text = str($Eventos_iniciais.get_children()[0].name)
@@ -115,7 +115,17 @@ func _on_Reiniciar_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/Main.tscn")
 
-
+func ui_configuration():
+	#$HUD.rect_size = get_viewport().size
+	$HUD/VoltarMenu.position.x = ((get_viewport().size.x/2) * Global.percent.x - ($HUD/VoltarMenu.normal.get_width()/2)) -70
+	$HUD/Reiniciar.position.x = ((get_viewport().size.x/2) * Global.percent.x - ($HUD/VoltarMenu.normal.get_width()/2)) -70
+	$HUD/VoltarMenu.position.y = ((get_viewport().size.y/100)*20) * Global.percent.y
+	$HUD/Reiniciar.position.y = ((get_viewport().size.y/100)*80) * Global.percent.y
+	$HUD/score.visible = false
+	$Nave.visible = true
+	$HUD/Reiniciar.visible = false
+	$HUD/VoltarMenu.visible = false
+	
 
 
 func event_config(obj):
@@ -170,3 +180,6 @@ func _on_HUD_gui_input(event):
 func _on_TimerPowerControl_timeout():
 	$Nave.status = ""
 	$TimerPowerControl.stop()
+
+
+
